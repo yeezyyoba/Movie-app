@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { searchMovies, getPopularMovies } from '../services/api';
 import '../css/Home.css';
 
-function Home() {
+function Home({ isFavorite, onFavoriteClick }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
@@ -62,7 +62,12 @@ function Home() {
       ) : (
         <div className="movies-grid">
           {movies.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              isFavorite={isFavorite(movie.id)}
+              onFavoriteClick={onFavoriteClick}
+            />
           ))}
         </div>
       )}

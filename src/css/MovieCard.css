@@ -18,12 +18,40 @@
   position: relative;
   aspect-ratio: 2/3;
   width: 100%;
+  background: linear-gradient(145deg, #2a2a2a, #101010);
 }
 
 .movie-poster img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.movie-poster-fallback {
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.movie-poster-fallback span {
+  color: #e50914;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+.movie-poster-fallback strong {
+  font-size: 1.05rem;
+  line-height: 1.3;
 }
 
 .movie-overlay {
@@ -49,14 +77,16 @@
   opacity: 1;
 }
 
-.favorite-btn {
+.favorite-button {
   position: absolute;
   top: 1rem;
   right: 1rem;
   color: white;
-  font-size: 1.5rem;
-  padding: 0.5rem;
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  border: none;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -66,11 +96,12 @@
   transition: background-color 0.2s;
 }
 
-.favorite-btn:hover {
+.favorite-button:hover {
   background-color: rgba(0, 0, 0, 0.8);
+  border-color: transparent;
 }
 
-.favorite-btn.active {
+.favorite-button.active {
   color: #ff4757;
 }
 
@@ -117,7 +148,7 @@
     padding: 0.75rem;
   }
 
-  .favorite-btn {
+  .favorite-button {
     width: 32px;
     height: 32px;
     font-size: 1.2rem;

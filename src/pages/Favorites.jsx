@@ -1,6 +1,26 @@
 
 import '../css/Favorites.css'
-function Favorites() {
+import MovieCard from '../components/MovieCard';
+
+function Favorites({ favorites, isFavorite, onFavoriteClick }) {
+  if (favorites.length > 0) {
+    return (
+      <div className="favorites">
+        <h2>Your Favorite Movies</h2>
+        <div className="movies-grid">
+          {favorites.map((movie) => (
+            <MovieCard
+              key={movie.id}
+              movie={movie}
+              isFavorite={isFavorite(movie.id)}
+              onFavoriteClick={onFavoriteClick}
+            />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="favorites-empty">
       <h2>No Favorite Movies Yet</h2>

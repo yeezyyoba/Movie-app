@@ -1,16 +1,40 @@
+import { useState } from 'react';
 import '../css/MovieCard.css';
 
-function MovieCard({ movie }) {
-  function onFavoriteClick() {
-    alert('You clicked the favorite button');
+function MovieCard({ movie, isFavorite, onFavoriteClick }) {
+  const [posterFailed, setPosterFailed] = useState(false);
+  const hasPoster = movie.poster_url && !posterFailed;
+
+  function handleFavoriteClick() {
+    onFavoriteClick(movie);
   }
 
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img src={movie.poster_url} alt={movie.title} />
+        {hasPoster ? (
+          <img
+            src={movie.poster_url}
+            alt={movie.title}
+            loading="lazy"
+            onError={() => setPosterFailed(true)}
+          />
+        ) : (
+          <div className="movie-poster-fallback" aria-label={`Poster unavailable for ${movie.title}`}>
+            <span>Poster unavailable</span>
+            <strong>{movie.title}</strong>
+          </div>
+        )}
         <div className="movie-overlay">
-          <button className="favorite-button" onClick={onFavoriteClick}> ㅤ♡ㅤ</button>
+          <button
+            type="button"
+            className={`favorite-button ${isFavorite ? 'active' : ''}`}
+            aria-label={`${isFavorite ? 'Remove from' : 'Add to'} favorites: ${movie.title}`}
+            aria-pressed={isFavorite}
+            onClick={handleFavoriteClick}
+          >
+            {isFavorite ? '♥' : '♡'}
+          </button>
         </div>
       </div>
       <div className="movie-info">
